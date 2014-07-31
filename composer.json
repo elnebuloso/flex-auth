@@ -1,0 +1,25 @@
+{
+    "version": "1.0.1",
+    "name": "elnebuloso\/flex-auth",
+    "type": "library",
+    "license": "MIT",
+    "description": "authentication",
+    "keywords": [
+        "authentication"
+    ],
+    "authors": [
+        {
+            "name": "Jeff Tunessen",
+            "email": "jeff.tunessen@gmail.com",
+            "role": "Maintainer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "autoload": {
+        "psr-0": {
+            "Flex\\": "src\/"
+        }
+    }
+}
