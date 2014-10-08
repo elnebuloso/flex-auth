@@ -1,5 +1,4 @@
 {
-    "version": "1.0.3",
     "name": "elnebuloso\/flex-auth",
     "type": "library",
     "license": "MIT",
@@ -15,8 +14,8 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
-        "elnebuloso\/flex-crypt": "1.*"
+        "php": "~5.3",
+        "elnebuloso\/flex-crypt": "~1.0"
     },
     "autoload": {
         "psr-0": {
