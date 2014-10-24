@@ -8,7 +8,6 @@ use Flex\Crypt\Rijandel256Crypt;
 /**
  * Class CryptCookie
  *
- * @package Flex\Auth
  * @author Jeff Tunessen <jeff.tunessen@gmail.com>
  */
 class CryptCookie {
