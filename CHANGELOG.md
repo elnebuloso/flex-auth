@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.2
+
+- added phpunit tests
+
 ## 2.0.1
 
 - added changelog
