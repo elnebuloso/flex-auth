@@ -13,6 +13,16 @@ use Flex\Crypt\Rijandel256Crypt;
 class CryptCookie {
 
     /**
+     * @var array
+     */
+    private $data;
+
+    /**
+     * @var string
+     */
+    private $encrypted;
+
+    /**
      * @var CryptInteface
      */
     private $crypt;
@@ -28,26 +38,54 @@ class CryptCookie {
     private $secret;
 
     /**
-     * @var array
-     */
-    private $data;
-
-    /**
      * @param string $name
      * @param string $secret
      * @param string $crypt
+     * @throws Exception
      */
     public function __construct($name, $secret, $crypt = 'Rijandel256Crypt') {
+        $this->read = false;
         $this->data = array();
         $this->name = $name;
         $this->secret = $secret;
 
         switch($crypt) {
             case 'Rijandel256Crypt':
-            default:
                 $this->crypt = new Rijandel256Crypt($this->secret);
                 break;
         }
+
+        if(is_null($this->crypt)) {
+            throw new Exception('missing encryption');
+        }
+    }
+
+    /**
+     * @param string $encrypted
+     */
+    public function setEncrypted($encrypted) {
+        $this->encrypted = $encrypted;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEncrypted() {
+        return $this->encrypted;
+    }
+
+    /**
+     * @param array $data
+     */
+    public function setData(array $data) {
+        $this->data = $data;
+    }
+
+    /**
+     * @return array
+     */
+    public function getData() {
+        return $this->data;
     }
 
     /**
@@ -85,35 +123,35 @@ class CryptCookie {
     }
 
     /**
-     * @param array $data
+     * @return string
      */
-    public function setData($data) {
-        $this->data = $data;
+    public function encryptData() {
+        $this->encrypted = $this->crypt->encrypt(serialize($this->data));
     }
 
     /**
      * @return array
      */
-    public function getData() {
-        return $this->data;
+    public function decryptData() {
+        $this->data = unserialize($this->crypt->decrypt($this->encrypted));
     }
 
     /**
-     * @return bool|mixed
+     * @return bool
      */
     public function read() {
-        if(!isset($_COOKIE[$this->name])) {
-            return false;
+        if(is_null($this->encrypted)) {
+            $this->encrypted = @$_COOKIE[$this->name];
         }
 
         try {
-            $data = unserialize($this->crypt->decrypt($_COOKIE[$this->name]));
+            $this->decryptData();
         }
         catch(Exception $e) {
+            $this->data = array();
+
             return false;
         }
-
-        $this->data = $data;
 
         return true;
     }
@@ -123,7 +161,9 @@ class CryptCookie {
      * @param string $path
      */
     public function write($lifetime = null, $path = '/') {
-        setcookie($this->name, $this->crypt->encrypt(serialize($this->data)), (!empty($lifetime)) ? strtotime($lifetime) : 0, $path);
+        $this->encryptData();
+
+        setcookie($this->name, $this->data, (!empty($lifetime)) ? strtotime($lifetime) : 0, $path);
     }
 
     /**
