@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.4
+
+- bugfix, updated phpunit
+
 ## 2.0.3
 
 - bugfix, updated phpunit

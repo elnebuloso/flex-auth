@@ -163,7 +163,7 @@ class CryptCookie {
     public function write($lifetime = null, $path = '/') {
         $this->encryptData();
 
-        setcookie($this->name, $this->data, (!empty($lifetime)) ? strtotime($lifetime) : 0, $path);
+        setcookie($this->name, $this->encrypted, (!empty($lifetime)) ? strtotime($lifetime) : 0, $path);
     }
 
     /**

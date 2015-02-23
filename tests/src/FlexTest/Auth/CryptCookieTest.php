@@ -111,6 +111,9 @@ class CryptCookieTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($result);
     }
 
+    /**
+     * @test
+     */
     public function test_readPreviousRead() {
         $secret = new OpenSSLGenerator();
         $secret = $secret->generate(64);
@@ -130,5 +133,25 @@ class CryptCookieTest extends \PHPUnit_Framework_TestCase {
         $result = $cookie->read();
         $this->assertFalse($result);
         $this->assertEquals(array(), $cookie->getData());
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function test_cookie() {
+        $secret = new OpenSSLGenerator();
+        $secret = $secret->generate(64);
+
+        $expected = array('foo' => 'bar');
+
+        $cookie = new CryptCookie('foo', $secret);
+        $cookie->setData($expected);
+
+        $cookie->write();
+        $cookie->clear();
+
+        $cookie->decryptData();
+        $this->assertEquals($expected, $cookie->getData());
     }
 }
