@@ -1,7 +1,6 @@
 # flex-auth
 
-[![Software License](https://img.shields.io/packagist/l/elnebuloso/flex-auth.svg?style=flat-square)](LICENSE)
-[![Build Status](https://img.shields.io/travis/elnebuloso/flex-auth/master.svg?style=flat-square)](https://travis-ci.org/elnebuloso/flex-auth)
+[![Build Status](https://travis-ci.org/elnebuloso/flex-auth.svg?branch=master)](https://travis-ci.org/elnebuloso/flex-auth)
 
 ## Requirements
 
@@ -16,7 +15,6 @@ The following versions of PHP are NOT supported by this version.
 
 * PHP 7.0
 * HHVM
-
 
 ## Installation / Usage
 
