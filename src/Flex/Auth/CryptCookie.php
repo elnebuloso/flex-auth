@@ -2,7 +2,6 @@
 namespace Flex\Auth;
 
 use Exception;
-use Flex\Crypt\CryptInteface;
 use Flex\Crypt\Rijandel256Crypt;
 
 /**
@@ -10,7 +9,8 @@ use Flex\Crypt\Rijandel256Crypt;
  *
  * @author Jeff Tunessen <jeff.tunessen@gmail.com>
  */
-class CryptCookie {
+class CryptCookie
+{
 
     /**
      * @var array
@@ -23,7 +23,7 @@ class CryptCookie {
     private $encrypted;
 
     /**
-     * @var CryptInteface
+     * @var Rijandel256Crypt
      */
     private $crypt;
 
@@ -43,19 +43,20 @@ class CryptCookie {
      * @param string $crypt
      * @throws Exception
      */
-    public function __construct($name, $secret, $crypt = 'Rijandel256Crypt') {
+    public function __construct($name, $secret, $crypt = 'Rijandel256Crypt')
+    {
         $this->read = false;
         $this->data = array();
         $this->name = $name;
         $this->secret = $secret;
 
-        switch($crypt) {
+        switch ($crypt) {
             case 'Rijandel256Crypt':
                 $this->crypt = new Rijandel256Crypt($this->secret);
                 break;
         }
 
-        if(is_null($this->crypt)) {
+        if (is_null($this->crypt)) {
             throw new Exception('missing encryption');
         }
     }
@@ -63,28 +64,32 @@ class CryptCookie {
     /**
      * @param string $encrypted
      */
-    public function setEncrypted($encrypted) {
+    public function setEncrypted($encrypted)
+    {
         $this->encrypted = $encrypted;
     }
 
     /**
      * @return string
      */
-    public function getEncrypted() {
+    public function getEncrypted()
+    {
         return $this->encrypted;
     }
 
     /**
      * @param array $data
      */
-    public function setData(array $data) {
+    public function setData(array $data)
+    {
         $this->data = $data;
     }
 
     /**
      * @return array
      */
-    public function getData() {
+    public function getData()
+    {
         return $this->data;
     }
 
@@ -92,7 +97,8 @@ class CryptCookie {
      * @param string $property
      * @param mixed $value
      */
-    public function __set($property, $value) {
+    public function __set($property, $value)
+    {
         $this->data[$property] = $value;
     }
 
@@ -100,8 +106,9 @@ class CryptCookie {
      * @param string $property
      * @return mixed
      */
-    public function __get($property) {
-        if(!array_key_exists($property, $this->data)) {
+    public function __get($property)
+    {
+        if (!array_key_exists($property, $this->data)) {
             return null;
         }
 
@@ -111,43 +118,47 @@ class CryptCookie {
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * @return string
      */
-    public function getSecret() {
+    public function getSecret()
+    {
         return $this->secret;
     }
 
     /**
      * @return string
      */
-    public function encryptData() {
+    public function encryptData()
+    {
         $this->encrypted = $this->crypt->encrypt(serialize($this->data));
     }
 
     /**
      * @return array
      */
-    public function decryptData() {
+    public function decryptData()
+    {
         $this->data = unserialize($this->crypt->decrypt($this->encrypted));
     }
 
     /**
      * @return bool
      */
-    public function read() {
-        if(is_null($this->encrypted)) {
+    public function read()
+    {
+        if (is_null($this->encrypted)) {
             $this->encrypted = @$_COOKIE[$this->name];
         }
 
         try {
             $this->decryptData();
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             $this->data = array();
 
             return false;
@@ -160,16 +171,17 @@ class CryptCookie {
      * @param string $lifetime strtotime valid string
      * @param string $path
      */
-    public function write($lifetime = null, $path = '/') {
+    public function write($lifetime = null, $path = '/')
+    {
         $this->encryptData();
-
         setcookie($this->name, $this->encrypted, (!empty($lifetime)) ? strtotime($lifetime) : 0, $path);
     }
 
     /**
      * @param string $path
      */
-    public function clear($path = '/') {
+    public function clear($path = '/')
+    {
         setcookie($this->name, null, strtotime('-1 day'), $path);
     }
 }

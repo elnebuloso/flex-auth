@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.5
+
+- PSR1, PSR2 Coding Standard
+
 ## 2.0.4
 
 - bugfix, updated phpunit

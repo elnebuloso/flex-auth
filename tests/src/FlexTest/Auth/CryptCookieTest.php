@@ -9,7 +9,8 @@ use Flex\Crypt\KeyGenerator\OpenSSLGenerator;
  *
  * @author Jeff Tunessen <jeff.tunessen@gmail.com>
  */
-class CryptCookieTest extends \PHPUnit_Framework_TestCase {
+class CryptCookieTest extends \PHPUnit_Framework_TestCase
+{
 
     /**
      * @var CryptCookie
@@ -24,7 +25,8 @@ class CryptCookieTest extends \PHPUnit_Framework_TestCase {
     /**
      * @return void
      */
-    public function setUp() {
+    public function setUp()
+    {
         $this->secret = new OpenSSLGenerator();
         $this->secret = $this->secret->generate(64);
 
@@ -34,28 +36,32 @@ class CryptCookieTest extends \PHPUnit_Framework_TestCase {
     /**
      * @return void
      */
-    public function tearDown() {
+    public function tearDown()
+    {
         $this->cookie = null;
     }
 
     /**
      * @test
      */
-    public function test_getName() {
+    public function test_getName()
+    {
         $this->assertEquals('foo', $this->cookie->getName());
     }
 
     /**
      * @test
      */
-    public function test_getSecret() {
+    public function test_getSecret()
+    {
         $this->assertEquals($this->secret, $this->cookie->getSecret());
     }
 
     /**
      * @test
      */
-    public function test_data() {
+    public function test_data()
+    {
         $this->cookie->bar = 'baz';
         $this->assertEquals('baz', $this->cookie->bar);
         $this->assertNull($this->cookie->barbaz);
@@ -73,14 +79,16 @@ class CryptCookieTest extends \PHPUnit_Framework_TestCase {
      * @expectedException \Exception
      * @expectedExceptionMessage missing encryption
      */
-    public function test_invalidCookieEncryption() {
+    public function test_invalidCookieEncryption()
+    {
         new CryptCookie('foo', 'bar', 'baz');
     }
 
     /**
      * @test
      */
-    public function test_encryption() {
+    public function test_encryption()
+    {
         $secret = new OpenSSLGenerator();
         $secret = $secret->generate(64);
 
@@ -101,7 +109,8 @@ class CryptCookieTest extends \PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function test_readFromMissingCookie() {
+    public function test_readFromMissingCookie()
+    {
         $secret = new OpenSSLGenerator();
         $secret = $secret->generate(64);
 
@@ -114,7 +123,8 @@ class CryptCookieTest extends \PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function test_readPreviousRead() {
+    public function test_readPreviousRead()
+    {
         $secret = new OpenSSLGenerator();
         $secret = $secret->generate(64);
 
@@ -139,7 +149,8 @@ class CryptCookieTest extends \PHPUnit_Framework_TestCase {
      * @test
      * @runInSeparateProcess
      */
-    public function test_cookie() {
+    public function test_cookie()
+    {
         $secret = new OpenSSLGenerator();
         $secret = $secret->generate(64);
 
