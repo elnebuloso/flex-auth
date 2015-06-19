@@ -1,7 +1,8 @@
+.build
 .idea
 .svn
-/build
-/vendor
-build.properties.jenkins
+build
+public
+vendor
 build.properties.local
 composer.lock
