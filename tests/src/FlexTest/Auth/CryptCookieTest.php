@@ -44,7 +44,7 @@ class CryptCookieTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function test_getName()
+    public function testGetName()
     {
         $this->assertEquals('foo', $this->cookie->getName());
     }
@@ -52,7 +52,7 @@ class CryptCookieTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function test_getSecret()
+    public function testGetSecret()
     {
         $this->assertEquals($this->secret, $this->cookie->getSecret());
     }
@@ -60,7 +60,7 @@ class CryptCookieTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function test_data()
+    public function testData()
     {
         $this->cookie->bar = 'baz';
         $this->assertEquals('baz', $this->cookie->bar);
@@ -79,7 +79,7 @@ class CryptCookieTest extends \PHPUnit_Framework_TestCase
      * @expectedException \Exception
      * @expectedExceptionMessage missing encryption
      */
-    public function test_invalidCookieEncryption()
+    public function testInvalidCookieEncryption()
     {
         new CryptCookie('foo', 'bar', 'baz');
     }
@@ -87,7 +87,7 @@ class CryptCookieTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function test_encryption()
+    public function testEncryption()
     {
         $secret = new OpenSSLGenerator();
         $secret = $secret->generate(64);
@@ -109,7 +109,7 @@ class CryptCookieTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function test_readFromMissingCookie()
+    public function testReadFromMissingCookie()
     {
         $secret = new OpenSSLGenerator();
         $secret = $secret->generate(64);
@@ -123,7 +123,7 @@ class CryptCookieTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function test_readPreviousRead()
+    public function testReadPreviousRead()
     {
         $secret = new OpenSSLGenerator();
         $secret = $secret->generate(64);
@@ -149,7 +149,7 @@ class CryptCookieTest extends \PHPUnit_Framework_TestCase
      * @test
      * @runInSeparateProcess
      */
-    public function test_cookie()
+    public function testCookie()
     {
         $secret = new OpenSSLGenerator();
         $secret = $secret->generate(64);
