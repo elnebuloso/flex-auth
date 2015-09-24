@@ -11,7 +11,6 @@ use Flex\Crypt\Rijandel256Crypt;
  */
 class CryptCookie
 {
-
     /**
      * @var array
      */
@@ -136,7 +135,7 @@ class CryptCookie
      */
     public function encryptData()
     {
-        $this->encrypted = $this->crypt->encrypt(serialize($this->data));
+        $this->encrypted = $this->crypt->encrypt(json_encode($this->data));
     }
 
     /**
@@ -144,7 +143,7 @@ class CryptCookie
      */
     public function decryptData()
     {
-        $this->data = unserialize($this->crypt->decrypt($this->encrypted));
+        $this->data = json_decode($this->crypt->decrypt($this->encrypted), true);
     }
 
     /**
