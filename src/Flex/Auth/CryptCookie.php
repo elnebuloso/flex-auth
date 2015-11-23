@@ -45,7 +45,7 @@ class CryptCookie
     public function __construct($name, $secret, $crypt = 'Rijandel256Crypt')
     {
         $this->read = false;
-        $this->data = array();
+        $this->data = [];
         $this->name = $name;
         $this->secret = $secret;
 
@@ -158,7 +158,7 @@ class CryptCookie
         try {
             $this->decryptData();
         } catch (Exception $e) {
-            $this->data = array();
+            $this->data = [];
 
             return false;
         }

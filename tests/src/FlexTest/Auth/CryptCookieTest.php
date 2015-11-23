@@ -11,7 +11,6 @@ use Flex\Crypt\KeyGenerator\OpenSSLGenerator;
  */
 class CryptCookieTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var CryptCookie
      */
@@ -66,10 +65,10 @@ class CryptCookieTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('baz', $this->cookie->bar);
         $this->assertNull($this->cookie->barbaz);
 
-        $expected = array('bar' => 'baz');
+        $expected = ['bar' => 'baz'];
         $this->assertEquals($expected, $this->cookie->getData());
 
-        $expected = array('bar' => '2015');
+        $expected = ['bar' => '2015'];
         $this->cookie->setData($expected);
         $this->assertEquals($expected, $this->cookie->getData());
     }
@@ -92,7 +91,7 @@ class CryptCookieTest extends \PHPUnit_Framework_TestCase
         $secret = new OpenSSLGenerator();
         $secret = $secret->generate(64);
 
-        $expected = array('foo' => 'bar');
+        $expected = ['foo' => 'bar'];
 
         $cookie = new CryptCookie('foo', $secret);
         $cookie->setData($expected);
@@ -128,13 +127,13 @@ class CryptCookieTest extends \PHPUnit_Framework_TestCase
         $secret = new OpenSSLGenerator();
         $secret = $secret->generate(64);
 
-        $expected = array('foo' => 'bar');
+        $expected = ['foo' => 'bar'];
 
         $cookie = new CryptCookie('foo', $secret);
         $cookie->setData($expected);
 
         $cookie->encryptData();
-        $cookie->setData(array());
+        $cookie->setData([]);
         $result = $cookie->read();
         $this->assertTrue($result);
         $this->assertEquals($expected, $cookie->getData());
@@ -142,7 +141,7 @@ class CryptCookieTest extends \PHPUnit_Framework_TestCase
         $cookie->setEncrypted('foo');
         $result = $cookie->read();
         $this->assertFalse($result);
-        $this->assertEquals(array(), $cookie->getData());
+        $this->assertEquals([], $cookie->getData());
     }
 
     /**
@@ -154,7 +153,7 @@ class CryptCookieTest extends \PHPUnit_Framework_TestCase
         $secret = new OpenSSLGenerator();
         $secret = $secret->generate(64);
 
-        $expected = array('foo' => 'bar');
+        $expected = ['foo' => 'bar'];
 
         $cookie = new CryptCookie('foo', $secret);
         $cookie->setData($expected);
