@@ -1,15 +1,16 @@
 <?php
-namespace FlexTest\Auth;
+namespace elnebuloso\FlexTest\Auth;
 
-use Flex\Auth\CryptCookie;
-use Flex\Crypt\KeyGenerator\OpenSSLGenerator;
+use elnebuloso\Flex\Auth\CryptCookie;
+use elnebuloso\Flex\Crypt\KeyGenerator\OpenSSLGenerator;
+use PHPUnit_Framework_TestCase;
 
 /**
  * Class CryptCookieTest
  *
  * @author Jeff Tunessen <jeff.tunessen@gmail.com>
  */
-class CryptCookieTest extends \PHPUnit_Framework_TestCase
+class CryptCookieTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var CryptCookie

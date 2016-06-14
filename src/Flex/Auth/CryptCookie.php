@@ -1,8 +1,8 @@
 <?php
-namespace Flex\Auth;
+namespace elnebuloso\Flex\Auth;
 
+use elnebuloso\Flex\Crypt\Rijandel256Crypt;
 use Exception;
-use Flex\Crypt\Rijandel256Crypt;
 
 /**
  * Class CryptCookie

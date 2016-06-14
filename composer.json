@@ -15,11 +15,20 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "elnebuloso/flex-crypt": "~3.0"
+        "elnebuloso/flex-crypt": "~4.0"
+    },
+    "require-dev": {
     },
     "autoload": {
-        "psr-0": {
-            "Flex\\": "src/"
+        "psr-4": {
+            "elnebuloso\\Flex\\": "src/Flex/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "elnebuloso\\FlexTest\\": "tests/src/FlexTest/"
+        }
+    },
+    "suggest": {
     }
 }
