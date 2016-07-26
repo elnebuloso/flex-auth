@@ -55,7 +55,7 @@ class CryptCookie
                 break;
         }
 
-        if (is_null($this->crypt)) {
+        if ($this->crypt === null) {
             throw new Exception('missing encryption');
         }
     }
@@ -151,7 +151,7 @@ class CryptCookie
      */
     public function read()
     {
-        if (is_null($this->encrypted)) {
+        if ($this->encrypted === null) {
             $this->encrypted = @$_COOKIE[$this->name];
         }
 

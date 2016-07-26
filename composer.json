@@ -1,10 +1,12 @@
 {
     "name": "elnebuloso/flex-auth",
-    "type": "library",
-    "license": "MIT",
     "description": "authentication",
+    "license": "MIT",
+    "type": "library",
     "keywords": [
-        "authentication"
+        "authentication",
+        "cookie",
+        "encryption"
     ],
     "authors": [
         {
@@ -14,21 +16,21 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "elnebuloso/flex-crypt": "~4.0"
+        "php": "^5.6 || ^7.0",
+        "elnebuloso/flex-crypt": "^5.0"
     },
-    "require-dev": {
-    },
+    "require-dev": {},
     "autoload": {
         "psr-4": {
-            "elnebuloso\\Flex\\": "src/Flex/"
+            "elnebuloso\\": "src/elnebuloso/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "elnebuloso\\FlexTest\\": "tests/src/FlexTest/"
+            "elnebuloso\\": "tests/src/elnebuloso/"
         }
     },
-    "suggest": {
-    }
+    "suggest": {},
+    "conflict": {},
+    "extra": {}
 }
